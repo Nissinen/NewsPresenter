@@ -1,0 +1,45 @@
+﻿<Window x:Class="NewsPresenter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NewsPresenter"
+        mc:Ignorable="d"
+        Title="NewsPresenter" Height="{Binding SystemParameters.PrimaryScreenHeight}" Width="{Binding SystemParameters.PrimaryScreenWidth}">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Name="SearchColumn" Width="3*"/>
+            <ColumnDefinition Name="MiddleColumn" Width="1*"/>
+            <ColumnDefinition Name="WebColumn" Width="6*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Name="MainPanel" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Orientation="Vertical" Width="400">
+            <Label HorizontalAlignment="Center" FontSize="40" Margin="0, 0, 0, 0">Select RSS feed</Label>
+            <ComboBox Name="SelectWebsite" SelectionChanged="SelectWebsite_SelectionChanged">
+            </ComboBox>
+            <ListBox  Name="Headers" SelectionChanged="Headers_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="TextBlock.FontSize" Value="18"></Setter>
+                        <Setter Property="Background" Value="#FFE0DCDC"></Setter>
+                        <Setter Property="Padding" Value="10"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="TextBlock.FontSize" Value="28"/>
+                                <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </StackPanel>
+        
+        <WebBrowser Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Name="webBrowser" />
+        <Button Grid.Column="1" Name="HideAndShow" Click="HideAndShow_Click" Content="Hide Sidebar"></Button>
+        <TextBox Grid.Column="2" Name="txtUrl" HorizontalAlignment="Stretch" FontSize="18" KeyUp="TextBox_KeyUp" />
+    </Grid>
+</Window>
